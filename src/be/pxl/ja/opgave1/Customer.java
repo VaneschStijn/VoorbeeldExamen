@@ -57,4 +57,8 @@ public class Customer {
 	public int getPoints() {
 		return points;
 	}
+
+	public void addPointsOfActivity(Activity activity) {
+		points += activity.getDistance() * activity.getActivityType().getPointsPerKm();
+	}
 }

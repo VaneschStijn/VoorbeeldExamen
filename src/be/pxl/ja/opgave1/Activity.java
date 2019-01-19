@@ -12,6 +12,14 @@ public class Activity {
 	private LocalDate activityDate;
 	private ActivityTracker tracker;
 
+	public Activity(String customerNumber, LocalDate activityDate, ActivityType activityType, double distance,  ActivityTracker tracker) {
+		this.customerNumber = customerNumber;
+		this.activityType = activityType;
+		this.distance = distance;
+		this.activityDate = activityDate;
+		this.tracker = tracker;
+	}
+
 	public String getCustomerNumber() {
 		return customerNumber;
 	}

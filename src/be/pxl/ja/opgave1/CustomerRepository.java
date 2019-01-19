@@ -1,5 +1,6 @@
 package be.pxl.ja.opgave1;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +15,10 @@ public class CustomerRepository {
 	}
 	
 	public Customer getByCustomerNumber(String customerNumber) {
-		// TODO: voorzie hier de implementatie om een klant te zoeken adhv zijn klantnummer
-		return null;
+		return customers.get(customerNumber);
 	}
 	
 	public List<Customer> findAll() {
-		// TODO: voorzie hier de implementatie om een lijst me alle klanten te retourneren
-		return null;
+		return new ArrayList<>(customers.values());
 	}
 }
