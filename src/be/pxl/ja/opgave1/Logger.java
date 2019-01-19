@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 
+// op verschillende plaatsen vraagt men logging op dezelfde manier, hence aparte functionaliteit in aparte logger
 class Logger {
 
 	private Path errorFile;
@@ -18,6 +19,7 @@ class Logger {
 		createErrorFileIfNeeded(errorFile);
 	}
 
+	// snelle check of file / directory bestaat
 	private void createErrorFileIfNeeded(Path errorFile) {
 		if (!Files.exists(errorFile)) {
 			try {
@@ -29,6 +31,7 @@ class Logger {
 		}
 	}
 
+	// gebruik option om file append te doen
 	void log(String error) {
 		try (BufferedWriter bufferedWriter = Files.newBufferedWriter(errorFile, StandardOpenOption.APPEND)) {
 			bufferedWriter.write(String.join(" - " , LocalDateTime.now().toString(), sourceFile, error));

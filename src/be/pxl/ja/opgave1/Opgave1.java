@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// Eerst de makkelijke streams oplossen / opgave2, daarna de grotere oefening doen met de activity tracker implementaties
 public class Opgave1 {
 	public static void main(String[] args) {
 		CustomerRepository customerRepository = new CustomerRepository();
@@ -55,6 +56,7 @@ public class Opgave1 {
 		customerRepository
 				.findAll()
 				.stream()
+				// iets andere manier, maar kan ook via sortering en dan eerste te nemen
 				.min((c1, c2) -> c2.getPoints() - c1.getPoints())
 				.ifPresent(c -> printActivities(c, allActivities));
 	}
@@ -63,10 +65,14 @@ public class Opgave1 {
 		Path directoryPath = Paths.get(directory);
 		Path errorFile = Paths.get("resources/opgave1/log/errors.log");
 		try {
+			// alle files 1 voor 1 behandelen
 			return Files
 					.list(directoryPath)
+					// enkel files geen directories
 					.filter(p -> Files.isRegularFile(p))
+					// process file
 					.map(file -> activityFileProcessor.processActivities(file, errorFile))
+					// resultaat is lijst, flatmap om van meerdere lijsten van activiteiten 1 lijst te maken
 					.flatMap(activities -> activities.stream())
 					.collect(Collectors.toList());
 		} catch (IOException e) {
@@ -83,6 +89,7 @@ public class Opgave1 {
 				.forEach(a -> System.out.println(a.getActivityDate() + " " + a.getActivityType() + " " + getPoints(a)));
 	}
 
+	// cast to int, maakt dat de komma getallen wegvallen, net zoals in de customer points
 	private static int getPoints(Activity a) {
 		return (int) (a.getDistance() * a.getActivityType().getPointsPerKm());
 	}
